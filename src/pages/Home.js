@@ -22,7 +22,7 @@ const Home = () => {
   }, []);
   let recentScreamsMockup = screams ? (
     screams.map((scream) => {
-      return <Scream scream={scream} />;
+      return <Scream key={scream.screamId} scream={scream} />;
     })
   ) : (
     <p>Loading ...</p>
