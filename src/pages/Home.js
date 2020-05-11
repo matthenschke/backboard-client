@@ -9,16 +9,23 @@ import Scream from "../components/Scream";
 const Home = () => {
   const [screams, setScreams] = useState(null);
   useEffect(() => {
-    axios
-      .get("/screams")
-      .then((res) => {
-        const { data } = res;
-        console.log(data);
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
+    const loadData = async () => {
+      try {
+        const { data } = await axios.get("/screams");
         setScreams(data);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error(err);
-      });
+      }
+    };
+    loadData();
+
+    // clean up when component unmounts
+    return () => {
+      source.cancel();
+    };
   }, []);
   let recentScreamsMockup = screams ? (
     screams.map((scream) => {

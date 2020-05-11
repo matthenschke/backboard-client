@@ -1,4 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
+
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 // MUI
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -37,6 +41,7 @@ const Scream = ({
     commentCount,
   },
 }) => {
+  dayjs.extend(relativeTime);
   return (
     <Card className={classes.card}>
       <CardMedia image={userImage} className={classes.image} />
@@ -50,12 +55,15 @@ const Scream = ({
           {userHandle}
         </Typography>
         <Typography variant="body2" color="textSecondary">
-          {createdAt}
+          {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
       </CardContent>
     </Card>
   );
 };
-
+Scream.propTypes = {
+  classes: PropTypes.object.isRequired,
+  scream: PropTypes.object.isRequired,
+};
 export default withStyles(styles)(Scream);
