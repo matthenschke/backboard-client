@@ -1,11 +1,136 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-const SignUp = () => {
+import withStyles from "@material-ui/core/styles/withStyles";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import TextField from "@material-ui/core/TextField";
+import { Typography, Button, Grid } from "@material-ui/core";
+
+const styles = (theme) => ({
+  ...theme.LoginSignup,
+});
+
+const SignUp = (props) => {
+  const { classes } = props;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [handle, setHandle] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const {
+        data: { token },
+      } = await axios.post("/signup", {
+        email,
+        password,
+        confirmPassword,
+        handle,
+      });
+      localStorage.setItem("FBIdToken", `Bearer ${token}`);
+
+      props.history.push("/"); // push url (redirect)
+    } catch (err) {
+      console.log(err.response.data);
+      setLoading(false);
+      setErrors(err.response.data);
+    }
+  };
+
   return (
-    <div>
-      <h1>Sign Up</h1>
-    </div>
+    <Grid
+      container
+      className={classes.main}
+      justify="center"
+      alignItems="center"
+    >
+      <Grid item sm />
+      <Grid item sm>
+        <Typography variant="h2" className={classes.title}>
+          Sign Up
+        </Typography>
+        <form noValidate onSubmit={handleSubmit} className={classes.form}>
+          <TextField
+            id="email"
+            label="Email"
+            name="email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            fullWidth
+            className={classes.textField}
+            helperText={errors.email}
+            error={errors.email ? true : false}
+          />
+          <TextField
+            id="password"
+            label="Password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            fullWidth
+            className={classes.textField}
+            helperText={errors.password}
+            error={errors.password ? true : false}
+          />
+          <TextField
+            id="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            fullWidth
+            className={classes.textField}
+            helperText={errors.confirmPassword}
+            error={errors.confirmPassword ? true : false}
+          />
+          <TextField
+            id="handle"
+            label="handle"
+            name="handle"
+            type="text"
+            onChange={(e) => setHandle(e.target.value)}
+            required
+            fullWidth
+            className={classes.textField}
+            helperText={errors.handle}
+            error={errors.handle ? true : false}
+          />
+          {errors.general && (
+            <Typography variant="body2" className={classes.error}>
+              {errors.general}
+            </Typography>
+          )}
+          <Button
+            type="submit"
+            color="primary"
+            variant="contained"
+            className={classes.button}
+            disabled={loading ? true : false}
+          >
+            Register
+            {loading && (
+              <CircularProgress className={classes.progress} size={30} />
+            )}
+          </Button>
+          <small>
+            Already have an account? Log in <Link to="/login">here</Link>
+          </small>
+        </form>
+      </Grid>
+      <Grid item sm />
+    </Grid>
   );
 };
 
-export default SignUp;
+SignUp.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(SignUp);
