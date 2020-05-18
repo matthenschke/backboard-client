@@ -14,10 +14,12 @@ const Home = () => {
 
     const loadData = async () => {
       try {
-        const { data } = await axios.get("/screams");
+        const { data } = await axios.get("/screams", {
+          cancelToken: source.token,
+        });
         setScreams(data);
       } catch (err) {
-        console.error(err);
+        console.log(err);
       }
     };
     loadData();

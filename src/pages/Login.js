@@ -33,7 +33,6 @@ const Login = (props) => {
 
       props.history.push("/"); // push url (redirect)
     } catch (err) {
-      console.log(err.response.data);
       setLoading(false);
       setErrors(err.response.data);
     }
