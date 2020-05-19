@@ -5,6 +5,7 @@ import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 
 import Scream from "../components/Scream";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const [screams, setScreams] = useState(null);

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import { Typography, Button, Grid } from "@material-ui/core";
+
+import { useDispatch, useSelector } from "react-redux";
+import { signupUser } from "../redux/actions/userActions";
 
 const styles = (theme) => ({
   ...theme.LoginSignup,
@@ -18,30 +20,24 @@ const SignUp = (props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [handle, setHandle] = useState("");
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const {
-        data: { token },
-      } = await axios.post("/signup", {
-        email,
-        password,
-        confirmPassword,
-        handle,
-      });
-      localStorage.setItem("FBIdToken", `Bearer ${token}`);
+  const dispatch = useDispatch();
+  const UI = useSelector((state) => state.UI);
+  const { loading } = UI;
 
-      props.history.push("/"); // push url (redirect)
-    } catch (err) {
-      console.log(err.response.data);
-      setLoading(false);
-      setErrors(err.response.data);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      signupUser({ email, password, confirmPassword, handle }, props.history)
+    );
   };
+
+  useEffect(() => {
+    if (UI.errors) {
+      setErrors(UI.errors);
+    }
+  }, [UI]);
 
   return (
     <Grid
