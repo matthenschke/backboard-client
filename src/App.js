@@ -14,7 +14,9 @@ import jwtDecode from "jwt-decode";
 
 import { useDispatch } from "react-redux";
 import { SET_AUTHENTICATED } from "./redux/types";
-import { logout } from "./redux/actions/userActions";
+import { logout, getUserData } from "./redux/actions/userActions";
+import axios from "axios";
+
 const App = () => {
   const token = localStorage.FBIdToken;
   const dispatch = useDispatch();
@@ -26,6 +28,8 @@ const App = () => {
         window.location.href = "/login";
       } else {
         dispatch({ type: SET_AUTHENTICATED });
+        axios.defaults.headers.common["Authorization"] = token;
+        dispatch(getUserData());
       }
     }
   }, [dispatch, token]);
@@ -36,18 +40,8 @@ const App = () => {
         <div className="container">
           <Switch>
             <Route exact path="/" component={Home}></Route>
-            <AuthRoute
-              exact
-              path="/login"
-              component={Login}
-              // authenticated={authenticated}
-            ></AuthRoute>
-            <AuthRoute
-              exact
-              path="/signup"
-              component={SignUp}
-              // authenticated={authenticated}
-            ></AuthRoute>
+            <AuthRoute exact path="/login" component={Login}></AuthRoute>
+            <AuthRoute exact path="/signup" component={SignUp}></AuthRoute>
           </Switch>
         </div>
       </Router>

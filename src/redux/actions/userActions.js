@@ -1,10 +1,11 @@
 import {
-  SET_AUTHENTICATED,
+  // SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   SET_ERRORS,
   LOADING_UI,
   CLEAR_ERRORS,
   SET_USER,
+  LOADING_USER,
 } from "../types";
 import axios from "axios";
 
@@ -51,6 +52,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: SET_UNAUTHENTICATED });
 };
 export const getUserData = () => async (dispatch) => {
+  dispatch({ type: LOADING_USER });
   try {
     const { data } = await axios.get("/user");
     dispatch({ type: SET_USER, payload: data });
