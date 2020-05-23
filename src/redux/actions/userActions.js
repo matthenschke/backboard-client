@@ -25,7 +25,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
     history.push("/"); // push url (redirect)
   } catch (err) {
     dispatch({ type: SET_ERRORS, payload: err.response.data });
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -42,7 +42,7 @@ export const signupUser = (newUserData, history) => async (dispatch) => {
     history.push("/");
   } catch (err) {
     dispatch({ type: SET_ERRORS, payload: err.response.data });
-    console.log(err);
+    console.error(err);
   }
 };
 export const logout = () => (dispatch) => {
@@ -56,17 +56,24 @@ export const getUserData = () => async (dispatch) => {
     const { data } = await axios.get("/user");
     dispatch({ type: SET_USER, payload: data });
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
 export const uploadImage = (formData) => async (dispatch) => {
-  // dispatch({ type: LOADING_USER });
   try {
-    const res = await axios.post("/user/image", formData);
-    console.log(res);
+    await axios.post("/user/image", formData);
     dispatch(getUserData());
   } catch (err) {
-    console.log(err);
+    console.error(err);
+  }
+};
+
+export const editUserDetails = (userDetails) => async (dispatch) => {
+  try {
+    axios.post("/user", userDetails);
+    dispatch(getUserData());
+  } catch (err) {
+    console.error(err);
   }
 };

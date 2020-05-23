@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import EditProfileDetails from "./EditProfileDetails";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {
@@ -14,6 +15,7 @@ import {
   Link as LinkIcon,
   CalendarToday,
   Edit,
+  KeyboardReturn,
 } from "@material-ui/icons";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -23,7 +25,7 @@ import { Link } from "react-router-dom";
 
 import dayjs from "dayjs";
 
-const styles = (theme) => ({
+const styles = () => ({
   paper: {
     padding: 20,
   },
@@ -89,6 +91,10 @@ const Profile = ({ classes }) => {
     const imgInput = document.getElementById("img-input");
     imgInput.click();
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   let profileMarkup = !loading ? (
     authenticated ? (
       <Paper className={classes.paper}>
@@ -138,6 +144,12 @@ const Profile = ({ classes }) => {
             <CalendarToday color="primary" />{" "}
             <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
           </div>
+          <Tooltip title="Logout" placement="top">
+            <IconButton onClick={handleLogout}>
+              <KeyboardReturn color="primary" />
+            </IconButton>
+          </Tooltip>
+          <EditProfileDetails />
         </div>
       </Paper>
     ) : (
