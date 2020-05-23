@@ -35,8 +35,8 @@ const Home = () => {
       return <Scream key={scream.screamId} scream={scream} />;
     })
   ) : (
-    <p>Loading ...</p>
-  );
+      <p>Loading Screams</p>
+    );
   return (
     <Grid container spacing={2}>
       <Grid item sm={8} xs={12}>

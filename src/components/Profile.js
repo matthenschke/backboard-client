@@ -1,15 +1,24 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-
 import withStyles from "@material-ui/core/styles/withStyles";
-import { Button, Paper, Link as MuiLink, Typography } from "@material-ui/core";
+import {
+  Button,
+  Paper,
+  Link as MuiLink,
+  Typography,
+  IconButton,
+  Tooltip,
+} from "@material-ui/core";
 import {
   LocationOn,
   Link as LinkIcon,
   CalendarToday,
+  Edit,
 } from "@material-ui/icons";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { uploadImage, logout } from "../redux/actions/userActions";
+
 import { Link } from "react-router-dom";
 
 import dayjs from "dayjs";
@@ -62,17 +71,41 @@ const styles = (theme) => ({
   },
 });
 const Profile = ({ classes }) => {
+  const dispatch = useDispatch();
   const {
     credentials: { handle, createdAt, imageUrl, bio, location, website },
     loading,
     authenticated,
   } = useSelector((state) => state.user);
+
+  const handleChange = (e) => {
+    const image = e.target.files[0];
+    console.log(image);
+    var formData = new FormData();
+    formData.append("image", image, image.name);
+    dispatch(uploadImage(formData));
+  };
+  const handleEditImg = () => {
+    const imgInput = document.getElementById("img-input");
+    imgInput.click();
+  };
   let profileMarkup = !loading ? (
     authenticated ? (
       <Paper className={classes.paper}>
         <div className={classes.profile}>
           <div className="img-wrapper">
             <img src={imageUrl} alt="profile" className="profile-img" />
+            <input
+              type="file"
+              id="img-input"
+              hidden="hidden"
+              onChange={handleChange}
+            ></input>
+            <Tooltip title="Edit Profile Pic" placement="top">
+              <IconButton className="button" onClick={handleEditImg}>
+                <Edit color="primary" />
+              </IconButton>
+            </Tooltip>
           </div>
           <hr />
           <div className="profile-details">
@@ -133,7 +166,7 @@ const Profile = ({ classes }) => {
       </Paper>
     )
   ) : (
-    <p>Loading</p>
+    <p>Loading Profile</p>
   );
   return profileMarkup;
 };

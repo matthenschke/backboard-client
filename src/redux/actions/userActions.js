@@ -1,5 +1,4 @@
 import {
-  // SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   SET_ERRORS,
   LOADING_UI,
@@ -48,7 +47,7 @@ export const signupUser = (newUserData, history) => async (dispatch) => {
 };
 export const logout = () => (dispatch) => {
   localStorage.removeItem("FBIdToken");
-  delete axios.defaults.common["Authorization"];
+  if (axios.defaults.common) delete axios.defaults.common;
   dispatch({ type: SET_UNAUTHENTICATED });
 };
 export const getUserData = () => async (dispatch) => {
@@ -56,6 +55,17 @@ export const getUserData = () => async (dispatch) => {
   try {
     const { data } = await axios.get("/user");
     dispatch({ type: SET_USER, payload: data });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const uploadImage = (formData) => async (dispatch) => {
+  // dispatch({ type: LOADING_USER });
+  try {
+    const res = await axios.post("/user/image", formData);
+    console.log(res);
+    dispatch(getUserData());
   } catch (err) {
     console.log(err);
   }
