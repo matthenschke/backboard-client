@@ -1,15 +1,9 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import EditProfileDetails from "./EditProfileDetails";
+import CustomButton from "./CustomButton";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {
-  Button,
-  Paper,
-  Link as MuiLink,
-  Typography,
-  IconButton,
-  Tooltip,
-} from "@material-ui/core";
+import { Button, Paper, Link as MuiLink, Typography } from "@material-ui/core";
 import {
   LocationOn,
   Link as LinkIcon,
@@ -82,7 +76,6 @@ const Profile = ({ classes }) => {
 
   const handleChange = (e) => {
     const image = e.target.files[0];
-    console.log(image);
     var formData = new FormData();
     formData.append("image", image, image.name);
     dispatch(uploadImage(formData));
@@ -107,11 +100,13 @@ const Profile = ({ classes }) => {
               hidden="hidden"
               onChange={handleChange}
             ></input>
-            <Tooltip title="Edit Profile Pic" placement="top">
-              <IconButton className="button" onClick={handleEditImg}>
-                <Edit color="primary" />
-              </IconButton>
-            </Tooltip>
+            <CustomButton
+              tipTitle="Edit Profile Pic"
+              btnClassName="button"
+              onClick={handleEditImg}
+            >
+              <Edit color="primary" />
+            </CustomButton>
           </div>
           <hr />
           <div className="profile-details">
@@ -144,11 +139,9 @@ const Profile = ({ classes }) => {
             <CalendarToday color="primary" />{" "}
             <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
           </div>
-          <Tooltip title="Logout" placement="top">
-            <IconButton onClick={handleLogout}>
-              <KeyboardReturn color="primary" />
-            </IconButton>
-          </Tooltip>
+          <CustomButton tipTitle="Logout" onClick={handleLogout}>
+            <KeyboardReturn color="primary" />
+          </CustomButton>
           <EditProfileDetails />
         </div>
       </Paper>

@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import CustomButton from "./CustomButton";
 import PropTypes from "prop-types";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -9,11 +10,9 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
+
 import EditIcon from "@material-ui/icons/Edit";
 
 const styles = (theme) => ({
@@ -58,15 +57,13 @@ const EditProfileDetails = ({ classes }) => {
   }, [credentials]);
   return (
     <Fragment>
-      <Tooltip title="Edit Details" placement="top">
-        <IconButton
-          variant="outlined"
-          onClick={handleClickOpen}
-          className={classes.button}
-        >
-          <EditIcon color="primary"></EditIcon>
-        </IconButton>
-      </Tooltip>
+      <CustomButton
+        tipTitle="Edit Details"
+        onClick={handleClickOpen}
+        btnClassName={classes.button}
+      >
+        <EditIcon color="primary"></EditIcon>
+      </CustomButton>
 
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>Edit Your Details</DialogTitle>
