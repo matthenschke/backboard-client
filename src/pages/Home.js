@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getScreams } from "../redux/actions/dataActions";
 
 // MUI
 import Grid from "@material-ui/core/Grid";
@@ -8,35 +9,19 @@ import Scream from "../components/Scream";
 import Profile from "../components/Profile";
 
 const Home = () => {
-  const [screams, setScreams] = useState(null);
+  const dispatch = useDispatch();
+  const { screams, loading } = useSelector((state) => state.data);
+
   useEffect(() => {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
-
-    const loadData = async () => {
-      try {
-        const { data } = await axios.get("/screams", {
-          cancelToken: source.token,
-        });
-        setScreams(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    loadData();
-
-    // clean up when component unmounts
-    return () => {
-      source.cancel();
-    };
-  }, []);
-  let recentScreamsMockup = screams ? (
+    dispatch(getScreams());
+  }, [dispatch]);
+  let recentScreamsMockup = !loading ? (
     screams.map((scream) => {
       return <Scream key={scream.screamId} scream={scream} />;
     })
   ) : (
-      <p>Loading Screams</p>
-    );
+    <p>Loading Screams</p>
+  );
   return (
     <Grid container spacing={2}>
       <Grid item sm={8} xs={12}>
