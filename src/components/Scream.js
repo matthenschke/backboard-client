@@ -1,5 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CustomButton from "./CustomButton";
+
+import { useDispatch, useSelector } from "react-redux";
+import { unlikeScream, likeScream } from "../redux/actions/dataActions";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -10,6 +14,10 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import ChatIcon from "@material-ui/icons/Chat";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+
 import { Link } from "react-router-dom";
 
 const styles = {
@@ -40,6 +48,40 @@ const Scream = ({
   },
 }) => {
   dayjs.extend(relativeTime);
+  const dispatch = useDispatch();
+  const {
+    user: { likes, authenticated },
+  } = useSelector((state) => state);
+
+  const likedScream = () => {
+    if (likes && likes.find((like) => like.screamId === screamId)) return true;
+    return false;
+  };
+
+  const like = () => {
+    dispatch(likeScream(screamId));
+  };
+  const unlike = () => {
+    dispatch(unlikeScream(screamId));
+  };
+
+  const likeButton = authenticated ? (
+    likedScream() ? (
+      <CustomButton tipTitle="Undo like" onClick={unlike}>
+        <FavoriteIcon color="primary" />
+      </CustomButton>
+    ) : (
+      <CustomButton tipTitle="like" onClick={like}>
+        <FavoriteBorder color="primary" />
+      </CustomButton>
+    )
+  ) : (
+    <CustomButton tipTitle="like">
+      <Link to="/login">
+        <FavoriteBorder color="primary" />
+      </Link>
+    </CustomButton>
+  );
   return (
     <Card className={classes.card}>
       <CardMedia image={userImage} className={classes.image} />
@@ -56,6 +98,12 @@ const Scream = ({
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
+        {likeButton}
+        <span>{likeCount} Like(s)</span>
+        <CustomButton tipTitle="comments">
+          <ChatIcon color="primary" />
+        </CustomButton>
+        <span>{commentCount} Comment(s)</span>
       </CardContent>
     </Card>
   );

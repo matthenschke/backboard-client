@@ -21,16 +21,17 @@ export const getScreams = () => async (dispatch) => {
 
 export const likeScream = (screamId) => async (dispatch) => {
   try {
-    const { data: scream } = axios.post(`/scream/${screamId}/like`);
-    dispatch({ type: LIKE_SCREAM, payload: scream });
+    const { data } = await axios.post(`/scream/${screamId}/like`);
+    console.log(data);
+    dispatch({ type: LIKE_SCREAM, payload: data });
   } catch (err) {
     console.error(err);
   }
 };
 
-export const unLikeScream = (screamId) => async (dispatch) => {
+export const unlikeScream = (screamId) => async (dispatch) => {
   try {
-    const { data: scream } = axios.delete(`/scream/${screamId}/like`);
+    const { data: scream } = await axios.delete(`/scream/${screamId}/like`);
     dispatch({ type: UNLIKE_SCREAM, payload: scream });
   } catch (err) {
     console.error(err);
