@@ -51,11 +51,9 @@ export default (state = initialState, action) => {
         ],
       };
     case UNLIKE_SCREAM:
-      console.log(state.likes);
       return {
         ...state,
         likes: state.likes.filter((like) => {
-          console.log(like);
           return like.screamId !== action.payload.screamId;
         }),
       };

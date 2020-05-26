@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CustomButton from "./CustomButton";
+import DeleteScream from "./DeleteScream";
 
 import { useDispatch, useSelector } from "react-redux";
 import { unlikeScream, likeScream } from "../redux/actions/dataActions";
@@ -24,6 +25,7 @@ const styles = {
   card: {
     display: "flex",
     marginBottom: 20,
+    position: "relative",
   },
 
   image: {
@@ -50,15 +52,19 @@ const Scream = ({
   dayjs.extend(relativeTime);
   const dispatch = useDispatch();
   const {
-    user: { likes, authenticated },
+    user: {
+      likes,
+      authenticated,
+      credentials: { handle: curHandle },
+    },
   } = useSelector((state) => state);
-
   const likedScream = () => {
     if (likes && likes.find((like) => like.screamId === screamId)) return true;
     return false;
   };
 
   const like = () => {
+    console.log(screamId);
     dispatch(likeScream(screamId));
   };
   const unlike = () => {
@@ -82,8 +88,12 @@ const Scream = ({
       </Link>
     </CustomButton>
   );
+  const deleteButton =
+    authenticated && userHandle === curHandle ? (
+      <DeleteScream screamId={screamId} />
+    ) : null;
   return (
-    <Card className={classes.card}>
+    <Card key={screamId} className={classes.card}>
       <CardMedia image={userImage} className={classes.image} />
       <CardContent className={classes.content}>
         <Typography
@@ -104,6 +114,7 @@ const Scream = ({
           <ChatIcon color="primary" />
         </CustomButton>
         <span>{commentCount} Comment(s)</span>
+        {deleteButton}
       </CardContent>
     </Card>
   );
