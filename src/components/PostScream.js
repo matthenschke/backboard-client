@@ -1,4 +1,5 @@
 import React, { useState, Fragment, useEffect } from "react";
+import PropTypes from "prop-types";
 import CustomButton from "./CustomButton";
 import { useDispatch, useSelector } from "react-redux";
 import { postScream, clearErrors } from "../redux/actions/dataActions";
@@ -20,11 +21,13 @@ const styles = {
   },
   CloseBtn: {
     position: "absolute",
-    left: "90%",
-    top: "10%",
+    left: "91%",
+    top: "6%",
   },
   SubmitBtn: {
     position: "relative",
+    float: "right",
+    margin: "10px 0",
   },
   Spinner: {
     position: "absolute",
@@ -107,5 +110,7 @@ const PostScream = ({ classes }) => {
     </Fragment>
   );
 };
-
+PostScream.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 export default withStyles(styles)(PostScream);
