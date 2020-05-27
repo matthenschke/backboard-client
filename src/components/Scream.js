@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CustomButton from "./CustomButton";
-import DeleteScream from "./DeleteScream";
+import DeleteScreamButton from "./DeleteScreamButton";
 
 import { useDispatch, useSelector } from "react-redux";
 import { unlikeScream, likeScream } from "../redux/actions/dataActions";
@@ -90,7 +90,7 @@ const Scream = ({
   );
   const deleteButton =
     authenticated && userHandle === curHandle ? (
-      <DeleteScream screamId={screamId} />
+      <DeleteScreamButton screamId={screamId} />
     ) : null;
   return (
     <Card key={screamId} className={classes.card}>

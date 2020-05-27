@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PostScream from "./PostScream";
 import { Link } from "react-router-dom/";
 // MUI
 import AppBar from "@material-ui/core/AppBar";
@@ -20,10 +21,7 @@ const Navbar = () => {
       <Toolbar className="nav-container">
         {authenticated ? (
           <Fragment>
-            <CustomButton tipTitle="Create a Post!">
-              <AddIcon color="primary" />
-            </CustomButton>
-
+            <PostScream />
             <Link to="/">
               <CustomButton tipTitle="Home">
                 <HomeIcon color="primary" />

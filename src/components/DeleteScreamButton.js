@@ -19,10 +19,11 @@ const styles = {
   deleteBtn: {
     position: "absolute",
     left: "80%",
+    top: "10%",
   },
 };
 
-const DeleteScream = ({ screamId, classes }) => {
+const DeleteScreamButton = ({ screamId, classes }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleDelete = () => {
@@ -63,7 +64,7 @@ const DeleteScream = ({ screamId, classes }) => {
     </Fragment>
   );
 };
-DeleteScream.propTypes = {
+DeleteScreamButton.propTypes = {
   screamId: PropTypes.string.isRequired,
 };
-export default withStyles(styles)(DeleteScream);
+export default withStyles(styles)(DeleteScreamButton);
