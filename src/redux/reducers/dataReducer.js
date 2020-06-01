@@ -51,6 +51,12 @@ export default (state = initialState, action) => {
         screams: [action.payload, ...state.screams],
       };
     }
+    case SET_SCREAM: {
+      return {
+        ...state,
+        scream: action.payload,
+      };
+    }
 
     default:
       return state;

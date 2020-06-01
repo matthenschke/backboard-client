@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CustomButton from "./CustomButton";
 import DeleteScreamButton from "./DeleteScreamButton";
+import ScreamDialog from "./ScreamDialog";
 
 import { useDispatch, useSelector } from "react-redux";
 import { unlikeScream, likeScream } from "../redux/actions/dataActions";
@@ -104,6 +105,7 @@ const Scream = ({
         >
           {userHandle}
         </Typography>
+        {deleteButton}
         <Typography variant="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>
@@ -114,7 +116,7 @@ const Scream = ({
           <ChatIcon color="primary" />
         </CustomButton>
         <span>{commentCount} Comment(s)</span>
-        {deleteButton}
+        <ScreamDialog screamId={screamId} userHandle={userHandle} />
       </CardContent>
     </Card>
   );

@@ -63,7 +63,6 @@ export const postScream = (screamBody) => async (dispatch) => {
     dispatch({ type: POST_SCREAM, payload: data });
     dispatch(clearErrors());
   } catch (err) {
-    console.error(err);
     dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
 };
@@ -75,7 +74,7 @@ export const clearErrors = () => (dispatch) => {
 export const getScream = (screamId) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   try {
-    const { data } = await axios.get(`/screams/${screamId}`);
+    const { data } = await axios.get(`/scream/${screamId}`);
     dispatch({ type: SET_SCREAM, payload: data });
     dispatch({ type: STOP_LOADING_UI });
   } catch (err) {
