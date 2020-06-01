@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import EditProfileDetails from "./EditProfileDetails";
-import CustomButton from "./CustomButton";
+import CustomButton from "../Utils/CustomButton";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Button, Paper, Link as MuiLink, Typography } from "@material-ui/core";
@@ -13,7 +13,7 @@ import {
 } from "@material-ui/icons";
 
 import { useSelector, useDispatch } from "react-redux";
-import { uploadImage, logout } from "../redux/actions/userActions";
+import { uploadImage, logout } from "../../redux/actions/userActions";
 
 import { Link } from "react-router-dom";
 

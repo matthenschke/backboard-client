@@ -1,8 +1,8 @@
 import React, { useState, Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import CustomButton from "./CustomButton";
+import CustomButton from "../Utils/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
-import { postScream, clearErrors } from "../redux/actions/dataActions";
+import { postScream, clearErrors } from "../../redux/actions/dataActions";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";

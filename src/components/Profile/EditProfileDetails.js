@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
-import CustomButton from "./CustomButton";
+import CustomButton from "../Utils/CustomButton";
 import PropTypes from "prop-types";
 
 import { useSelector, useDispatch } from "react-redux";
-import { editUserDetails } from "../redux/actions/userActions";
+import { editUserDetails } from "../../redux/actions/userActions";
 
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";

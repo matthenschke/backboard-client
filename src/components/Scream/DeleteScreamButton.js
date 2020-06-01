@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import CustomButton from "./CustomButton";
+import CustomButton from "../Utils/CustomButton";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
@@ -12,8 +12,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 
 import { useDispatch } from "react-redux";
-import { deleteScream } from "../redux/actions/dataActions";
-//
+import { deleteScream } from "../../redux/actions/dataActions";
 
 const styles = {
   deleteBtn: {

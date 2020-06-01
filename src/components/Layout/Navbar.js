@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import PostScream from "./PostScream";
+import PostScream from "../Scream/PostScream";
 import { Link } from "react-router-dom/";
 // MUI
 import AppBar from "@material-ui/core/AppBar";
@@ -10,7 +10,7 @@ import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
-import CustomButton from "./CustomButton";
+import CustomButton from "../Utils/CustomButton";
 
 import { useSelector } from "react-redux";
 

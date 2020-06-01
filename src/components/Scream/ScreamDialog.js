@@ -1,10 +1,11 @@
 import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import CustomButton from "./CustomButton";
+import CustomButton from "../Utils/CustomButton";
+import LikeButton from "./LikeButton";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getScream } from "../redux/actions/dataActions";
+import { getScream } from "../../redux/actions/dataActions";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
@@ -18,6 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ChatIcon from "@material-ui/icons/Chat";
 
 import dayjs from "dayjs";
 
@@ -40,6 +42,15 @@ const styles = {
     position: "absolute",
     left: "90%",
   },
+  expandBtn: {
+    position: "absolute",
+    left: "90%",
+  },
+  spinnerWrapper: {
+    textAlign: "center",
+    marginTop: 50,
+    marginBottom: 50,
+  },
 };
 
 const ScreamDialog = ({ screamId, userHandle, classes }) => {
@@ -60,9 +71,11 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
     },
   } = useSelector((state) => state);
   const dialogMarkup = loading ? (
-    <CircularProgress size={200} />
+    <div className={classes.spinnerWrapper}>
+      <CircularProgress size={200} thickness={2} />
+    </div>
   ) : (
-    <Grid container spacing={16}>
+    <Grid container spacing={10}>
       <Grid item sm={5}>
         <img
           src={userImage}
@@ -85,6 +98,12 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
         </Typography>
         <hr className={classes.separator} />
         <Typography variant="body1">{body}</Typography>
+        <LikeButton screamId={screamId} />
+        <span>{likeCount} likes</span>
+        <CustomButton tipTitle="comments">
+          <ChatIcon color="primary" />
+        </CustomButton>
+        <span>{commentCount} Comment(s)</span>
       </Grid>
     </Grid>
   );
