@@ -23,10 +23,12 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ChatIcon from "@material-ui/icons/Chat";
 
 import dayjs from "dayjs";
+import theme from "../../utils/theme";
 
-const styles = {
+const styles = (theme) => ({
+  ...theme.root,
   content: {},
-  separator: {
+  invisibleSeparator: {
     border: "none",
     margin: 4,
   },
@@ -52,12 +54,12 @@ const styles = {
     marginTop: 50,
     marginBottom: 50,
   },
-  mainSeparator: {
+  visibleSeparator: {
     width: "100%",
     borderBottom: "1px solid rgba(0,0,0, 0.1)",
     marginBottom: 20,
   },
-};
+});
 
 const ScreamDialog = ({ screamId, userHandle, classes }) => {
   const dispatch = useDispatch();
@@ -98,11 +100,11 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
         >
           @{userHandle}
         </Typography>
-        <hr className={classes.separator} />
+        <hr className={classes.invisibleSeparator} />
         <Typography variant="body2" color="textSecondary">
           {dayjs(createdAt).format("h:mm a, MMM DD YYYY")}
         </Typography>
-        <hr className={classes.separator} />
+        <hr className={classes.invisibleSeparator} />
         <Typography variant="body1">{body}</Typography>
         <LikeButton screamId={screamId} />
         <span>{likeCount} likes</span>
@@ -111,7 +113,7 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
         </CustomButton>
         <span>{commentCount} Comment(s)</span>
       </Grid>
-      <hr className={classes.mainSeparator} />
+      <hr className={classes.visibleSeparator} />
       <Comments comments={comments} />
     </Grid>
   );

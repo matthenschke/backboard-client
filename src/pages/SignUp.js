@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signupUser } from "../redux/actions/userActions";
 
 const styles = (theme) => ({
-  ...theme.LoginSignup,
+  ...theme.root,
 });
 
 const SignUp = (props) => {

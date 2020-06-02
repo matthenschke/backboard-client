@@ -19,7 +19,8 @@ import { Link } from "react-router-dom";
 
 import dayjs from "dayjs";
 
-const styles = () => ({
+const styles = (theme) => ({
+  ...theme.root,
   paper: {
     padding: 20,
   },
@@ -46,7 +47,7 @@ const styles = () => ({
         verticalAlign: "middle",
       },
       "& a": {
-        color: "#00bcd4",
+        color: "#17408B",
       },
     },
     "& hr": {
@@ -110,12 +111,7 @@ const Profile = ({ classes }) => {
           </div>
           <hr />
           <div className="profile-details">
-            <MuiLink
-              component={Link}
-              to={`/users/${handle}`}
-              color="primary"
-              variant="h5"
-            >
+            <MuiLink component={Link} to={`/users/${handle}`} variant="h5">
               @{handle}
             </MuiLink>
             {bio && <Typography variant="body2">{bio}</Typography>}

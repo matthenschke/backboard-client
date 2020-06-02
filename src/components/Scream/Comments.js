@@ -8,13 +8,15 @@ import Typography from "@material-ui/core/Typography";
 
 import dayjs from "dayjs";
 
-const styles = {};
+const styles = (theme) => ({
+  ...theme.root,
+});
 
 const Comments = ({ comments, classes }) => {
   return (
     <Grid container>
-      {comments.map((comment) => {
-        const { createdAt, userHandle, userImage, body } = comments;
+      {comments.map((comment, index) => {
+        const { createdAt, userHandle, userImage, body } = comment;
         return (
           <Fragment key={createdAt}>
             <Grid item sm={12}>
@@ -36,11 +38,18 @@ const Comments = ({ comments, classes }) => {
                     >
                       {userHandle}
                     </Typography>
-                    <Typography variant="body2" color="text"></Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
+                    </Typography>
+                    <hr className={classes.invisibleSeparator} />
+                    <Typography variant="body1">{body}</Typography>
                   </div>
                 </Grid>
               </Grid>
             </Grid>
+            {index !== comments.length - 1 && (
+              <hr className={classes.visibleSeparator} />
+            )}
           </Fragment>
         );
       })}
@@ -52,4 +61,4 @@ Comments.propTypes = {
   comments: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(Comments);
+export default withStyles(styles, { withTheme: true })(Comments);
