@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import CustomButton from "../Utils/CustomButton";
 import LikeButton from "./LikeButton";
+import Comments from "./Comments";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getScream } from "../../redux/actions/dataActions";
@@ -51,6 +52,11 @@ const styles = {
     marginTop: 50,
     marginBottom: 50,
   },
+  mainSeparator: {
+    width: "100%",
+    borderBottom: "1px solid rgba(0,0,0, 0.1)",
+    marginBottom: 20,
+  },
 };
 
 const ScreamDialog = ({ screamId, userHandle, classes }) => {
@@ -75,7 +81,7 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
       <CircularProgress size={200} thickness={2} />
     </div>
   ) : (
-    <Grid container spacing={10}>
+    <Grid container spacing={16}>
       <Grid item sm={5}>
         <img
           src={userImage}
@@ -105,6 +111,8 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
         </CustomButton>
         <span>{commentCount} Comment(s)</span>
       </Grid>
+      <hr className={classes.mainSeparator} />
+      <Comments comments={comments} />
     </Grid>
   );
   return (
