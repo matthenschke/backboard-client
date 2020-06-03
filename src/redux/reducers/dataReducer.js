@@ -6,6 +6,7 @@ import {
   UNLIKE_SCREAM,
   DELETE_SCREAM,
   POST_SCREAM,
+  ADD_COMMENT,
 } from "../types";
 
 const initialState = {
@@ -58,6 +59,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         scream: action.payload,
+      };
+    }
+    case ADD_COMMENT: {
+      return {
+        ...state,
+        scream: {
+          ...state.scream,
+          comments: [action.payload, ...state.scream.comments],
+        },
       };
     }
 

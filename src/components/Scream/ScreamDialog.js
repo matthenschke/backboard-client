@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 import CustomButton from "../Utils/CustomButton";
 import LikeButton from "./LikeButton";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getScream } from "../../redux/actions/dataActions";
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import Button from "@material-ui/core/Button";
+
 import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
+
 import DialogContent from "@material-ui/core/DialogContent";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
@@ -23,7 +23,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ChatIcon from "@material-ui/icons/Chat";
 
 import dayjs from "dayjs";
-import theme from "../../utils/theme";
 
 const styles = (theme) => ({
   ...theme.root,
@@ -114,6 +113,7 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
         <span>{commentCount} Comment(s)</span>
       </Grid>
       <hr className={classes.visibleSeparator} />
+      <CommentForm screamId={screamId} />
       <Comments comments={comments} />
     </Grid>
   );

@@ -10,6 +10,7 @@ import {
   SET_ERRORS,
   SET_SCREAM,
   STOP_LOADING_UI,
+  ADD_COMMENT,
 } from "../types";
 import axios from "axios";
 
@@ -40,7 +41,6 @@ export const likeScream = (screamId) => async (dispatch) => {
 export const unlikeScream = (screamId) => async (dispatch) => {
   try {
     const { data: scream } = await axios.delete(`/scream/${screamId}/like`);
-    console.log(scream);
     dispatch({ type: UNLIKE_SCREAM, payload: scream });
   } catch (err) {
     console.error(err);
@@ -79,5 +79,18 @@ export const getScream = (screamId) => async (dispatch) => {
     dispatch({ type: STOP_LOADING_UI });
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const addComment = (screamId, commentData) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(
+      `/scream/${screamId}/comment`,
+      commentData
+    );
+    dispatch({ type: ADD_COMMENT, payload: data });
+    dispatch(clearErrors());
+  } catch (err) {
+    dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
 };
