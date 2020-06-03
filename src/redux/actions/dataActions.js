@@ -88,6 +88,7 @@ export const addComment = (screamId, commentData) => async (dispatch) => {
       `/scream/${screamId}/comment`,
       commentData
     );
+    console.log(data);
     dispatch({ type: ADD_COMMENT, payload: data });
     dispatch(clearErrors());
   } catch (err) {

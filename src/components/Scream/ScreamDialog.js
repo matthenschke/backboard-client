@@ -7,7 +7,7 @@ import Comments from "./Comments";
 import CommentForm from "./CommentForm";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getScream } from "../../redux/actions/dataActions";
+import { getScream, clearErrors } from "../../redux/actions/dataActions";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -69,6 +69,7 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
     dispatch(getScream(screamId));
   };
   const handleClose = () => {
+    dispatch(clearErrors());
     setOpen(false);
   };
   const {
