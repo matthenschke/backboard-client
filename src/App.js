@@ -9,6 +9,8 @@ import AuthRoute from "./components/Utils/AuthRoute";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
+import User from "./pages/User";
+
 import Navbar from "./components/Layout/Navbar";
 
 const App = () => {
@@ -21,6 +23,7 @@ const App = () => {
             <Route exact path="/" component={Home}></Route>
             <AuthRoute exact path="/login" component={Login}></AuthRoute>
             <AuthRoute exact path="/signup" component={SignUp}></AuthRoute>
+            <Route exact path="/user/:handle" component={User} />
           </Switch>
         </div>
       </Router>

@@ -11,6 +11,7 @@ import {
   SET_SCREAM,
   STOP_LOADING_UI,
   ADD_COMMENT,
+  GET_USER_PROFILE,
 } from "../types";
 import axios from "axios";
 
@@ -93,5 +94,16 @@ export const addComment = (screamId, commentData) => async (dispatch) => {
     dispatch(clearErrors());
   } catch (err) {
     dispatch({ type: SET_ERRORS, payload: err.response.data });
+  }
+};
+
+export const getUserData = (userHandle) => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    const { data } = await axios.get(`/user/${userHandle}`);
+    console.log(data);
+    dispatch({ type: GET_USER_PROFILE, payload: data });
+  } catch (err) {
+    dispatch({ type: GET_USER_PROFILE, payload: null });
   }
 };

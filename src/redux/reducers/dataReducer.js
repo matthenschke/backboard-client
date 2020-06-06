@@ -7,12 +7,14 @@ import {
   DELETE_SCREAM,
   POST_SCREAM,
   ADD_COMMENT,
+  GET_USER_PROFILE,
 } from "../types";
 
 const initialState = {
   screams: [],
   scream: {},
   loading: false,
+  profile: {},
 };
 
 export default (state = initialState, action) => {
@@ -68,6 +70,14 @@ export default (state = initialState, action) => {
           ...state.scream,
           comments: [action.payload, ...state.scream.comments],
         },
+      };
+    }
+    case GET_USER_PROFILE: {
+      return {
+        ...state,
+        screams: action.payload.screams,
+        loading: false,
+        profile: action.payload.credentials,
       };
     }
 

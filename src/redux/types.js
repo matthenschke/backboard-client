@@ -19,3 +19,4 @@ export const UNLIKE_SCREAM = "UNLIKE_SCREAM";
 export const DELETE_SCREAM = "DELETE_SCREAM";
 export const POST_SCREAM = "POST_SCREAM";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const GET_USER_PROFILE = "GET_USER_PROFILE";
