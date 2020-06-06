@@ -14,7 +14,7 @@ const initialState = {
   screams: [],
   scream: {},
   loading: false,
-  profile: {},
+  profile: null,
 };
 
 export default (state = initialState, action) => {
