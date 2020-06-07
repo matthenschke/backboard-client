@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
 import { Typography, Button, Grid } from "@material-ui/core";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,9 @@ import { loginUser } from "../redux/actions/userActions";
 
 const styles = (theme) => ({
   ...theme.root,
+  paper: {
+    padding: 20,
+  },
 });
 
 const Login = (props) => {
@@ -41,55 +45,58 @@ const Login = (props) => {
       alignItems="center"
     >
       <Grid item />
+
       <Grid item>
-        <Typography variant="h2" className={classes.title}>
-          Login
-        </Typography>
-        <form noValidate onSubmit={handleSubmit} className={classes.form}>
-          <TextField
-            id="email"
-            label="Email"
-            name="email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            fullWidth
-            className={classes.textField}
-            helperText={errors.email}
-            error={errors.email ? true : false}
-          />
-          <TextField
-            id="password"
-            label="Password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            fullWidth
-            className={classes.textField}
-            helperText={errors.password}
-            error={errors.password ? true : false}
-          />
-          {errors.general && (
-            <Typography variant="body2" className={classes.error}>
-              {errors.general}
-            </Typography>
-          )}
-          <Button
-            type="submit"
-            color="primary"
-            variant="contained"
-            className={classes.button}
-            disabled={loading ? true : false}
-          >
+        <Paper className={classes.paper}>
+          <Typography variant="h2" className={classes.title}>
             Login
-            {loading && (
-              <CircularProgress className={classes.progress} size={30} />
+          </Typography>
+          <form noValidate onSubmit={handleSubmit} className={classes.form}>
+            <TextField
+              id="email"
+              label="Email"
+              name="email"
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              fullWidth
+              className={classes.textField}
+              helperText={errors.email}
+              error={errors.email ? true : false}
+            />
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              fullWidth
+              className={classes.textField}
+              helperText={errors.password}
+              error={errors.password ? true : false}
+            />
+            {errors.general && (
+              <Typography variant="body2" className={classes.error}>
+                {errors.general}
+              </Typography>
             )}
-          </Button>
-          <small>
-            Don't have an account? Sign up <Link to="/signup">here</Link>
-          </small>
-        </form>
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              className={classes.button}
+              disabled={loading ? true : false}
+            >
+              Login
+              {loading && (
+                <CircularProgress className={classes.progress} size={30} />
+              )}
+            </Button>
+            <small>
+              Don't have an account? Sign up <Link to="/signup">here</Link>
+            </small>
+          </form>
+        </Paper>
       </Grid>
       <Grid item />
     </Grid>

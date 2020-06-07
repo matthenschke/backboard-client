@@ -2,13 +2,21 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getScreams } from "../redux/actions/dataActions";
 
+import BackgroundImg from "../img/background.jpg";
+
 // MUI
 import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 import Scream from "../components/Scream/Scream";
 import Profile from "../components/Profile/Profile";
+console.log(BackgroundImg);
 
-const Home = () => {
+const styles = (theme) => ({
+  ...theme.root,
+});
+
+const Home = ({ classes }) => {
   const dispatch = useDispatch();
   const { screams, loading } = useSelector((state) => state.data);
 
@@ -23,15 +31,17 @@ const Home = () => {
     <p>Loading Screams</p>
   );
   return (
-    <Grid container spacing={2}>
-      <Grid item sm={8} xs={12}>
-        {recentScreamsMockup}
+    <div className="home">
+      <Grid container spacing={2}>
+        <Grid item sm={8} xs={12}>
+          {recentScreamsMockup}
+        </Grid>
+        <Grid item sm={4} xs={12}>
+          <Profile />
+        </Grid>
       </Grid>
-      <Grid item sm={4} xs={12}>
-        <Profile />
-      </Grid>
-    </Grid>
+    </div>
   );
 };
 
-export default Home;
+export default withStyles(styles)(Home);
