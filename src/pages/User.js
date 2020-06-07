@@ -13,7 +13,7 @@ const User = () => {
   const {
     data: { screams, profile, loading },
   } = useSelector((state) => state);
-  const { handle } = useParams();
+  const { handle, scream, screamId } = useParams();
   useEffect(() => {
     dispatch(getUserData(handle));
   }, [dispatch, handle]);
@@ -21,9 +21,15 @@ const User = () => {
   let recentScreamsMockup = !loading ? (
     screams === null ? (
       <p>No screams for this user</p>
-    ) : (
+    ) : !screamId ? (
       screams.map((scream) => {
         return <Scream key={scream.screamId} scream={scream} />;
+      })
+    ) : (
+      screams.map((scream) => {
+        if (scream.screamId !== screamId)
+          return <Scream key={scream.screamId} scream={scream} />;
+        return <Scream key={scream.screamId} scream={scream} openDialog />;
       })
     )
   ) : (

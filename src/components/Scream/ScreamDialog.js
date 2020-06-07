@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import CustomButton from "../Utils/CustomButton";
@@ -60,18 +60,34 @@ const styles = (theme) => ({
   },
 });
 
-const ScreamDialog = ({ screamId, userHandle, classes }) => {
+const ScreamDialog = ({
+  screamId,
+  userHandle,
+  classes,
+  openDialog,
+  history,
+}) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
+  const [oldUrl, setOldUrl] = useState(null);
+  const handleOpen = useCallback(() => {
+    let oldPath = window.location.pathname;
+    let newPath = `/user/${userHandle}/scream/${screamId}`;
+    if (oldPath === newPath) {
+      oldPath = `/user/${userHandle}`;
+    }
+    setOldUrl(oldPath);
+    window.history.pushState(null, null, newPath);
     setOpen(true);
+
     dispatch(getScream(screamId));
-  };
+  }, [dispatch, screamId, userHandle]);
   const handleClose = () => {
+    window.history.pushState(null, null, oldUrl);
     dispatch(clearErrors());
     setOpen(false);
   };
+
   const {
     UI: { loading },
     data: {
@@ -118,6 +134,12 @@ const ScreamDialog = ({ screamId, userHandle, classes }) => {
       <Comments comments={comments} />
     </Grid>
   );
+
+  useEffect(() => {
+    if (openDialog) {
+      handleOpen();
+    }
+  }, [handleOpen, openDialog]);
   return (
     <Fragment>
       <CustomButton

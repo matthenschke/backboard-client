@@ -101,7 +101,7 @@ export const getUserData = (userHandle) => async (dispatch) => {
   dispatch({ type: LOADING_DATA });
   try {
     const { data } = await axios.get(`/user/${userHandle}`);
-    console.log(data);
+
     dispatch({ type: GET_USER_PROFILE, payload: data });
   } catch (err) {
     dispatch({ type: GET_USER_PROFILE, payload: null });
