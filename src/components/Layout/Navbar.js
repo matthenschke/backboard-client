@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PostScream from "../Scream/PostScream";
+import Notifications from "./Notifications";
 import { Link } from "react-router-dom/";
 // MUI
 import AppBar from "@material-ui/core/AppBar";
@@ -7,7 +8,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 
 import HomeIcon from "@material-ui/icons/Home";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import CustomButton from "../Utils/CustomButton";
 
@@ -26,9 +26,7 @@ const Navbar = () => {
                 <HomeIcon color="primary" />
               </CustomButton>
             </Link>
-            <CustomButton tipTitle="Notifications">
-              <NotificationsIcon color="primary" />
-            </CustomButton>
+            <Notifications />
           </Fragment>
         ) : (
           <Fragment>

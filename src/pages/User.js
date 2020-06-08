@@ -13,7 +13,7 @@ const User = () => {
   const {
     data: { screams, profile, loading },
   } = useSelector((state) => state);
-  const { handle, scream, screamId } = useParams();
+  const { handle, screamId } = useParams();
   useEffect(() => {
     dispatch(getUserData(handle));
   }, [dispatch, handle]);

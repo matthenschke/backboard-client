@@ -15,6 +15,7 @@ const styles = (theme) => ({
   ...theme.root,
   paper: {
     padding: 20,
+    paddingBottom: 100,
   },
 });
 

@@ -5,6 +5,7 @@ import {
   CLEAR_ERRORS,
   SET_USER,
   LOADING_USER,
+  MARK_NOTIFICATIONS_READ,
 } from "../types";
 import axios from "axios";
 
@@ -73,6 +74,17 @@ export const editUserDetails = (userDetails) => async (dispatch) => {
   try {
     axios.post("/user", userDetails);
     dispatch(getUserData());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const markNotificationsRead = (notificationIds) => async (dispatch) => {
+  try {
+    const { data } = await axios.post("/notifications", {
+      notificationIds,
+    });
+    dispatch({ type: MARK_NOTIFICATIONS_READ });
   } catch (err) {
     console.error(err);
   }
