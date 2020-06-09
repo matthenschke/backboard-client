@@ -10,6 +10,9 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logout, getUserData } from "./redux/actions/userActions";
 import axios from "axios";
 
+axios.defaults.baseURL =
+  "https://us-central1-social-app-a0b02.cloudfunctions.net/api";
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
