@@ -2,15 +2,13 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getScreams } from "../redux/actions/dataActions";
 
-import BackgroundImg from "../img/background.jpg";
-
 // MUI
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import Scream from "../components/Scream/Scream";
 import Profile from "../components/Profile/Profile";
-console.log(BackgroundImg);
+import ScreamSkeleton from "../components/Scream/ScreamSkeleton";
 
 const styles = (theme) => ({
   ...theme.root,
@@ -28,7 +26,7 @@ const Home = ({ classes }) => {
       return <Scream key={scream.screamId} scream={scream} />;
     })
   ) : (
-    <p>Loading Screams</p>
+    <ScreamSkeleton />
   );
   return (
     <div className="home">

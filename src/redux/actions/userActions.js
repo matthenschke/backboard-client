@@ -81,7 +81,7 @@ export const editUserDetails = (userDetails) => async (dispatch) => {
 
 export const markNotificationsRead = (notificationIds) => async (dispatch) => {
   try {
-    const { data } = await axios.post("/notifications", {
+    await axios.post("/notifications", {
       notificationIds,
     });
     dispatch({ type: MARK_NOTIFICATIONS_READ });

@@ -1,11 +1,9 @@
-import React, { useState, useEffect, Fragment } from "react";
-
+import React, { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import CustomButton from "../Utils/CustomButton";
 
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import NotificationsIcon from "@material-ui/icons/Notifications";

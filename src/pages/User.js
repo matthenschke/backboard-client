@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-// import PropTypes from "prop-types";
-// import axios from "axios";
 import Scream from "../components/Scream/Scream";
 import StaticProfile from "../components/Profile/StaticProfile";
+import ScreamSkeleton from "../components/Scream/ScreamSkeleton";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserData } from "../redux/actions/dataActions";
@@ -33,7 +32,7 @@ const User = () => {
       })
     )
   ) : (
-    <p>Loading Screams</p>
+    <ScreamSkeleton />
   );
 
   return (
