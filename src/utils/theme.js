@@ -77,5 +77,50 @@ export default {
     commentData: {
       marginLeft: 20,
     },
+    paper: {
+      padding: 20,
+    },
+    profile: {
+      "& .img-wrapper": {
+        textAlign: "center",
+        position: "relative",
+        "& button": {
+          position: "absolute",
+          top: "80%",
+          left: "70%",
+        },
+      },
+      "& .profile-img": {
+        width: 200,
+        height: 200,
+        objectFit: "cover",
+        maxWidth: "100%",
+        borderRadius: "50%",
+      },
+      "& .profile-details": {
+        textAlign: "center",
+        "& span, svg": {
+          verticalAlign: "middle",
+        },
+        "& a": {
+          color: "#17408B",
+        },
+      },
+      "& hr": {
+        border: "none",
+        margin: "0 0 10px 0",
+      },
+      "& svg.button": {
+        "&:hover": {
+          cursor: "pointer",
+        },
+      },
+    },
+    buttons: {
+      textAlign: "center",
+      "& a": {
+        margin: "20px 10px",
+      },
+    },
   },
 };

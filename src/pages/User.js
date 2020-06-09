@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserData } from "../redux/actions/dataActions";
 import { useParams } from "react-router-dom";
+import ProfileSkeleton from "../components/Profile/ProfileSkeleton";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const User = () => {
         {recentScreamsMockup}
       </Grid>
       <Grid item sm={4} xs={12}>
-        {profile ? <StaticProfile profile={profile} /> : <p>Loading Profile</p>}
+        {profile ? <StaticProfile profile={profile} /> : <ProfileSkeleton />}
       </Grid>
     </Grid>
   );

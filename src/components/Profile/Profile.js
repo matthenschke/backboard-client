@@ -4,6 +4,7 @@ import CustomButton from "../Utils/CustomButton";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Button, Paper, Link as MuiLink, Typography } from "@material-ui/core";
+import ProfileSkeleton from "./ProfileSkeleton";
 import {
   LocationOn,
   Link as LinkIcon,
@@ -21,51 +22,6 @@ import dayjs from "dayjs";
 
 const styles = (theme) => ({
   ...theme.root,
-  paper: {
-    padding: 20,
-  },
-  profile: {
-    "& .img-wrapper": {
-      textAlign: "center",
-      position: "relative",
-      "& button": {
-        position: "absolute",
-        top: "80%",
-        left: "70%",
-      },
-    },
-    "& .profile-img": {
-      width: 200,
-      height: 200,
-      objectFit: "cover",
-      maxWidth: "100%",
-      borderRadius: "50%",
-    },
-    "& .profile-details": {
-      textAlign: "center",
-      "& span, svg": {
-        verticalAlign: "middle",
-      },
-      "& a": {
-        color: "#17408B",
-      },
-    },
-    "& hr": {
-      border: "none",
-      margin: "0 0 10px 0",
-    },
-    "& svg.button": {
-      "&:hover": {
-        cursor: "pointer",
-      },
-    },
-  },
-  buttons: {
-    textAlign: "center",
-    "& a": {
-      margin: "20px 10px",
-    },
-  },
 });
 const Profile = ({ classes }) => {
   const dispatch = useDispatch();
@@ -167,7 +123,7 @@ const Profile = ({ classes }) => {
       </Paper>
     )
   ) : (
-    <p>Loading Profile</p>
+    <ProfileSkeleton />
   );
   return profileMarkup;
 };
