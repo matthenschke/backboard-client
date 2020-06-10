@@ -13,7 +13,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 const styles = (theme) => ({
   ...theme.root,
 });
-const CommentForm = ({ classes, screamId }) => {
+const CommentForm = ({ classes, bucketId }) => {
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState({});
 
@@ -25,7 +25,7 @@ const CommentForm = ({ classes, screamId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addComment(screamId, { body }));
+    dispatch(addComment(bucketId, { body }));
   };
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const CommentForm = ({ classes, screamId }) => {
           className={classes.textField}
           name="body"
           type="text"
-          label="Comment on Scream"
+          label="Comment on Bucket"
           error={errors.comment ? true : false}
           helperText={errors.comment}
           value={body}
@@ -67,6 +67,6 @@ const CommentForm = ({ classes, screamId }) => {
 
 CommentForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  screamId: PropTypes.string.isRequired,
+  bucketId: PropTypes.string.isRequired,
 };
 export default withStyles(styles)(CommentForm);

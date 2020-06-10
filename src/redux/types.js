@@ -12,12 +12,12 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const STOP_LOADING_UI = "STOP_LOADING_UI";
 
 // Data Reducer Types
-export const SET_SCREAMS = "SET_SCREAMS";
-export const SET_SCREAM = "SET_SCREAM";
+export const SET_BUCKETS = "SET_BUCKETS";
+export const SET_BUCKET = "SET_BUCKET";
 export const LOADING_DATA = "LOADING_DATA";
-export const LIKE_SCREAM = "LIKE_SCREAM";
-export const UNLIKE_SCREAM = "UNLIKE_SCREAM";
-export const DELETE_SCREAM = "DELETE_SCREAM";
-export const POST_SCREAM = "POST_SCREAM";
+export const LIKE_BUCKET = "LIKE_BUCKET";
+export const UNLIKE_BUCKET = "UNLIKE_BUCKET";
+export const DELETE_BUCKET = "DELETE_BUCKET";
+export const POST_BUCKET = "POST_BUCKET";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const GET_USER_PROFILE = "GET_USER_PROFILE";

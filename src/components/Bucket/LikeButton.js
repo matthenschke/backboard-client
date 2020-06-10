@@ -3,29 +3,28 @@ import PropTypes from "prop-types";
 import CustomButton from "../Utils/CustomButton";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { unlikeScream, likeScream } from "../../redux/actions/dataActions";
+import { unlikeBucket, likeBucket } from "../../redux/actions/dataActions";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
-const LikeButton = ({ screamId }) => {
+const LikeButton = ({ bucketId }) => {
   const dispatch = useDispatch();
   const {
     user: { likes, authenticated },
   } = useSelector((state) => state);
-  const likedScream = () => {
-    if (likes && likes.find((like) => like.screamId === screamId)) return true;
+  const likedBucket = () => {
+    if (likes && likes.find((like) => like.bucketId === bucketId)) return true;
     return false;
   };
 
   const like = () => {
-    console.log(screamId);
-    dispatch(likeScream(screamId));
+    dispatch(likeBucket(bucketId));
   };
   const unlike = () => {
-    dispatch(unlikeScream(screamId));
+    dispatch(unlikeBucket(bucketId));
   };
   const likeButton = authenticated ? (
-    likedScream() ? (
+    likedBucket() ? (
       <CustomButton tipTitle="Undo like" onClick={unlike}>
         <FavoriteIcon color="primary" />
       </CustomButton>
@@ -45,7 +44,7 @@ const LikeButton = ({ screamId }) => {
   return likeButton;
 };
 LikeButton.propTypes = {
-  screamId: PropTypes.string.isRequired,
+  bucketId: PropTypes.string.isRequired,
 };
 
 export default LikeButton;

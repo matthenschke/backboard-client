@@ -12,7 +12,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 
 import { useDispatch } from "react-redux";
-import { deleteScream } from "../../redux/actions/dataActions";
+import { deleteBucket } from "../../redux/actions/dataActions";
 
 const styles = {
   deleteBtn: {
@@ -22,11 +22,11 @@ const styles = {
   },
 };
 
-const DeleteScreamButton = ({ screamId, classes }) => {
+const DeleteBucketButton = ({ bucketId, classes }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleDelete = () => {
-    dispatch(deleteScream(screamId));
+    dispatch(deleteBucket(bucketId));
     setOpen(false);
   };
   const handleOpen = () => {
@@ -38,7 +38,7 @@ const DeleteScreamButton = ({ screamId, classes }) => {
   return (
     <Fragment>
       <CustomButton
-        tipTitle="Delete Scream"
+        tipTitle="Delete Bucket"
         onClick={handleOpen}
         btnClassName={classes.deleteBtn}
       >
@@ -46,7 +46,7 @@ const DeleteScreamButton = ({ screamId, classes }) => {
       </CustomButton>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>
-          Are you sure do you want to delete this scream?
+          Are you sure do you want to delete this bucket?
         </DialogTitle>
         <DialogContent>
           Note that this action cannot be reversed!!!
@@ -63,7 +63,7 @@ const DeleteScreamButton = ({ screamId, classes }) => {
     </Fragment>
   );
 };
-DeleteScreamButton.propTypes = {
-  screamId: PropTypes.string.isRequired,
+DeleteBucketButton.propTypes = {
+  bucketId: PropTypes.string.isRequired,
 };
-export default withStyles(styles)(DeleteScreamButton);
+export default withStyles(styles)(DeleteBucketButton);

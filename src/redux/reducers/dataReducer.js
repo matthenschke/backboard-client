@@ -1,28 +1,28 @@
 import {
-  SET_SCREAM,
-  SET_SCREAMS,
+  SET_BUCKET,
+  SET_BUCKETS,
   LOADING_DATA,
-  LIKE_SCREAM,
-  UNLIKE_SCREAM,
-  DELETE_SCREAM,
-  POST_SCREAM,
+  LIKE_BUCKET,
+  UNLIKE_BUCKET,
+  DELETE_BUCKET,
+  POST_BUCKET,
   ADD_COMMENT,
   GET_USER_PROFILE,
 } from "../types";
 
 const initialState = {
-  screams: [],
-  scream: {},
+  buckets: [],
+  bucket: {},
   loading: false,
   profile: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_SCREAMS:
+    case SET_BUCKETS:
       return {
         ...state,
-        screams: action.payload,
+        buckets: action.payload,
         loading: false,
       };
     case LOADING_DATA:
@@ -30,52 +30,52 @@ export default (state = initialState, action) => {
         ...state,
         loading: true,
       };
-    case LIKE_SCREAM:
-    case UNLIKE_SCREAM:
-      let index = state.screams.findIndex(
-        (scream) => scream.screamId === action.payload.screamId
+    case LIKE_BUCKET:
+    case UNLIKE_BUCKET:
+      let index = state.buckets.findIndex(
+        (bucket) => bucket.bucketId === action.payload.bucketId
       );
-      if (state.scream.screamId === action.payload.screamId) {
-        state.scream = action.payload;
+      if (state.bucket.bucketId === action.payload.bucketId) {
+        state.bucket = action.payload;
       }
-      state.screams[index] = action.payload;
+      state.buckets[index] = action.payload;
       return {
         ...state,
       };
-    case DELETE_SCREAM: {
-      let index = state.screams.findIndex(
-        (scream) => scream.screamId === action.payload
+    case DELETE_BUCKET: {
+      let index = state.buckets.findIndex(
+        (bucket) => bucket.bucketId === action.payload
       );
-      state.screams.splice(index, 1);
+      state.buckets.splice(index, 1);
       return {
         ...state,
       };
     }
-    case POST_SCREAM: {
+    case POST_BUCKET: {
       return {
         ...state,
-        screams: [action.payload, ...state.screams],
+        buckets: [action.payload, ...state.buckets],
       };
     }
-    case SET_SCREAM: {
+    case SET_BUCKET: {
       return {
         ...state,
-        scream: action.payload,
+        bucket: action.payload,
       };
     }
     case ADD_COMMENT: {
       return {
         ...state,
-        scream: {
-          ...state.scream,
-          comments: [action.payload, ...state.scream.comments],
+        bucket: {
+          ...state.bucket,
+          comments: [action.payload, ...state.bucket.comments],
         },
       };
     }
     case GET_USER_PROFILE: {
       return {
         ...state,
-        screams: action.payload.screams,
+        buckets: action.payload.buckets,
         loading: false,
         profile: action.payload.credentials,
       };

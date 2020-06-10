@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import Scream from "../components/Scream/Scream";
+import Bucket from "../components/Bucket/Bucket";
 import StaticProfile from "../components/Profile/StaticProfile";
-import ScreamSkeleton from "../components/Scream/ScreamSkeleton";
+import BucketSkeleton from "../components/Bucket/BucketSkeleton";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserData } from "../redux/actions/dataActions";
@@ -11,35 +11,35 @@ import ProfileSkeleton from "../components/Profile/ProfileSkeleton";
 const User = () => {
   const dispatch = useDispatch();
   const {
-    data: { screams, profile, loading },
+    data: { buckets, profile, loading },
   } = useSelector((state) => state);
-  const { handle, screamId } = useParams();
+  const { handle, bucketId } = useParams();
   useEffect(() => {
     dispatch(getUserData(handle));
   }, [dispatch, handle]);
 
-  let recentScreamsMockup = !loading ? (
-    screams === null ? (
-      <p>No screams for this user</p>
-    ) : !screamId ? (
-      screams.map((scream) => {
-        return <Scream key={scream.screamId} scream={scream} />;
+  let recentBucketsMockup = !loading ? (
+    buckets === null ? (
+      <p>No buckets for this user</p>
+    ) : !bucketId ? (
+      buckets.map((bucket) => {
+        return <Bucket key={bucket.bucketId} bucket={bucket} />;
       })
     ) : (
-      screams.map((scream) => {
-        if (scream.screamId !== screamId)
-          return <Scream key={scream.screamId} scream={scream} />;
-        return <Scream key={scream.screamId} scream={scream} openDialog />;
+      buckets.map((bucket) => {
+        if (bucket.bucketId !== bucketId)
+          return <Bucket key={bucket.bucketId} bucket={bucket} />;
+        return <Bucket key={bucket.bucketId} bucket={bucket} openDialog />;
       })
     )
   ) : (
-    <ScreamSkeleton />
+    <BucketSkeleton />
   );
 
   return (
     <Grid container spacing={2}>
       <Grid item sm={8} xs={12}>
-        {recentScreamsMockup}
+        {recentBucketsMockup}
       </Grid>
       <Grid item sm={4} xs={12}>
         {profile ? <StaticProfile profile={profile} /> : <ProfileSkeleton />}

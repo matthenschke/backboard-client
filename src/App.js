@@ -26,7 +26,7 @@ const App = () => {
             <Route exact path="/user/:handle" component={User} />
             <Route
               exact
-              path="/user/:handle/scream/:screamId"
+              path="/user/:handle/bucket/:bucketId"
               component={User}
             />
           </Switch>

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getScreams } from "../redux/actions/dataActions";
+import { getBuckets } from "../redux/actions/dataActions";
 
 // MUI
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import Scream from "../components/Scream/Scream";
+import Bucket from "../components/Bucket/Bucket";
 import Profile from "../components/Profile/Profile";
-import ScreamSkeleton from "../components/Scream/ScreamSkeleton";
+import BucketSkeleton from "../components/Bucket/BucketSkeleton";
 
 const styles = (theme) => ({
   ...theme.root,
@@ -16,23 +16,23 @@ const styles = (theme) => ({
 
 const Home = ({ classes }) => {
   const dispatch = useDispatch();
-  const { screams, loading } = useSelector((state) => state.data);
+  const { buckets, loading } = useSelector((state) => state.data);
 
   useEffect(() => {
-    dispatch(getScreams());
+    dispatch(getBuckets());
   }, [dispatch]);
-  let recentScreamsMockup = !loading ? (
-    screams.map((scream) => {
-      return <Scream key={scream.screamId} scream={scream} />;
+  let recentBucketsMockup = !loading ? (
+    buckets.map((bucket) => {
+      return <Bucket key={bucket.bucketId} bucket={bucket} />;
     })
   ) : (
-    <ScreamSkeleton />
+    <BucketSkeleton />
   );
   return (
     <div className="home">
       <Grid container spacing={2}>
         <Grid item sm={8} xs={12}>
-          {recentScreamsMockup}
+          {recentBucketsMockup}
         </Grid>
         <Grid item sm={4} xs={12}>
           <Profile />

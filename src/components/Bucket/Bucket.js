@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CustomButton from "../Utils/CustomButton";
-import DeleteScreamButton from "./DeleteScreamButton";
-import ScreamDialog from "./ScreamDialog";
+import DeleteBucketButton from "./DeleteBucketButton";
+import BucketDialog from "./BucketDialog";
 import LikeButton from "./LikeButton";
 
 import dayjs from "dayjs";
@@ -35,14 +35,14 @@ const styles = {
     padding: 30,
   },
 };
-const Scream = ({
+const Bucket = ({
   classes,
-  scream: {
+  bucket: {
     userImage,
     body,
     createdAt,
     userHandle,
-    screamId,
+    bucketId,
     likeCount,
     commentCount,
   },
@@ -60,10 +60,10 @@ const Scream = ({
 
   const deleteButton =
     authenticated && userHandle === curHandle ? (
-      <DeleteScreamButton screamId={screamId} />
+      <DeleteBucketButton bucketId={bucketId} />
     ) : null;
   return (
-    <Card key={screamId} className={classes.card}>
+    <Card key={bucketId} className={classes.card}>
       <CardMedia image={userImage} className={classes.image} />
       <CardContent className={classes.content}>
         <Typography
@@ -79,14 +79,14 @@ const Scream = ({
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
-        <LikeButton screamId={screamId} />
+        <LikeButton bucketId={bucketId} />
         <span>{likeCount} Like(s)</span>
         <CustomButton tipTitle="comments">
           <ChatIcon color="primary" />
         </CustomButton>
         <span>{commentCount} Comment(s)</span>
-        <ScreamDialog
-          screamId={screamId}
+        <BucketDialog
+          bucketId={bucketId}
           userHandle={userHandle}
           openDialog={openDialog}
         />
@@ -94,9 +94,9 @@ const Scream = ({
     </Card>
   );
 };
-Scream.propTypes = {
+Bucket.propTypes = {
   classes: PropTypes.object.isRequired,
-  scream: PropTypes.object.isRequired,
+  bucket: PropTypes.object.isRequired,
   openDialog: PropTypes.bool,
 };
-export default withStyles(styles)(Scream);
+export default withStyles(styles)(Bucket);

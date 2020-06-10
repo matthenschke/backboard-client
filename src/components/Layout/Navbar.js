@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import PostScream from "../Scream/PostScream";
+import PostBucket from "../Bucket/PostBucket";
 import Notifications from "./Notifications";
 import { Link } from "react-router-dom/";
 // MUI
@@ -20,7 +20,7 @@ const Navbar = () => {
       <Toolbar className="nav-container">
         {authenticated ? (
           <Fragment>
-            <PostScream />
+            <PostBucket />
             <Link to="/">
               <CustomButton tipTitle="Home">
                 <HomeIcon color="primary" />

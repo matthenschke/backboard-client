@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import CustomButton from "../Utils/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
-import { postScream, clearErrors } from "../../redux/actions/dataActions";
+import { postBucket, clearErrors } from "../../redux/actions/dataActions";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
@@ -33,7 +33,7 @@ const styles = {
     position: "absolute",
   },
 };
-const PostScream = ({ classes }) => {
+const PostBucket = ({ classes }) => {
   const dispatch = useDispatch();
   const { UI } = useSelector((state) => state);
   const [open, setOpen] = useState(false);
@@ -53,7 +53,7 @@ const PostScream = ({ classes }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postScream(body));
+    dispatch(postBucket(body));
   };
   const handleOpen = () => {
     setOpen(true);
@@ -65,7 +65,7 @@ const PostScream = ({ classes }) => {
   };
   return (
     <Fragment>
-      <CustomButton tipTitle="Post a Scream!" onClick={handleOpen}>
+      <CustomButton tipTitle="Shoot your Bucket!" onClick={handleOpen}>
         <AddIcon color="primary" />
       </CustomButton>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
@@ -76,16 +76,16 @@ const PostScream = ({ classes }) => {
         >
           <CloseIcon color="primary" />
         </CustomButton>
-        <DialogTitle>Post A New Scream</DialogTitle>
+        <DialogTitle>Post A New Bucket</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
             <TextField
               type="text"
               name="body"
-              label="SCREAM!"
+              label="GET BUCKETSSS!"
               multiline
               rows={3}
-              placeholder="Scream"
+              placeholder="Bucket"
               error={errors.body ? true : false}
               helperText={errors.body}
               className={classes.TextField}
@@ -99,7 +99,7 @@ const PostScream = ({ classes }) => {
               className={classes.SubmitBtn}
               disabled={UI.loading}
             >
-              Add Scream
+              Add Bucket
               {UI.loading && (
                 <CircularProgress size={30} className={classes.Spinner} />
               )}
@@ -110,7 +110,7 @@ const PostScream = ({ classes }) => {
     </Fragment>
   );
 };
-PostScream.propTypes = {
+PostBucket.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(PostScream);
+export default withStyles(styles)(PostBucket);

@@ -76,9 +76,9 @@ const Notifications = () => {
               component={Link}
               color="default1"
               variant="body1"
-              to={`/user/${not.recipient}/scream/${not.screamId}`}
+              to={`/user/${not.recipient}/bucket/${not.bucketId}`}
             >
-              {not.sender} {verb} your scream {time}
+              {not.sender} {verb} your bucket {time}
             </Typography>
           </MenuItem>
         );

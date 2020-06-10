@@ -7,7 +7,7 @@ import Comments from "./Comments";
 import CommentForm from "./CommentForm";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getScream, clearErrors } from "../../redux/actions/dataActions";
+import { getBucket, clearErrors } from "../../redux/actions/dataActions";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -60,8 +60,8 @@ const styles = (theme) => ({
   },
 });
 
-const ScreamDialog = ({
-  screamId,
+const BucketDialog = ({
+  bucketId,
   userHandle,
   classes,
   openDialog,
@@ -72,7 +72,7 @@ const ScreamDialog = ({
   const [oldUrl, setOldUrl] = useState(null);
   const handleOpen = useCallback(() => {
     let oldPath = window.location.pathname;
-    let newPath = `/user/${userHandle}/scream/${screamId}`;
+    let newPath = `/user/${userHandle}/bucket/${bucketId}`;
     if (oldPath === newPath) {
       oldPath = `/user/${userHandle}`;
     }
@@ -80,8 +80,8 @@ const ScreamDialog = ({
     window.history.pushState(null, null, newPath);
     setOpen(true);
 
-    dispatch(getScream(screamId));
-  }, [dispatch, screamId, userHandle]);
+    dispatch(getBucket(bucketId));
+  }, [userHandle, dispatch, bucketId]);
   const handleClose = () => {
     window.history.pushState(null, null, oldUrl);
     dispatch(clearErrors());
@@ -91,7 +91,7 @@ const ScreamDialog = ({
   const {
     UI: { loading },
     data: {
-      scream: { createdAt, commentCount, comments, likeCount, body, userImage },
+      bucket: { createdAt, commentCount, comments, likeCount, body, userImage },
     },
   } = useSelector((state) => state);
   const dialogMarkup = loading ? (
@@ -122,7 +122,7 @@ const ScreamDialog = ({
         </Typography>
         <hr className={classes.invisibleSeparator} />
         <Typography variant="body1">{body}</Typography>
-        <LikeButton screamId={screamId} />
+        <LikeButton bucketId={bucketId} />
         <span>{likeCount} likes</span>
         <CustomButton tipTitle="comments">
           <ChatIcon color="primary" />
@@ -130,7 +130,7 @@ const ScreamDialog = ({
         <span>{commentCount} Comment(s)</span>
       </Grid>
       <hr className={classes.visibleSeparator} />
-      <CommentForm screamId={screamId} />
+      <CommentForm bucketId={bucketId} />
       <Comments comments={comments} />
     </Grid>
   );
@@ -144,7 +144,7 @@ const ScreamDialog = ({
     <Fragment>
       <CustomButton
         onClick={handleOpen}
-        tipTitle="Expand scream"
+        tipTitle="Expand Bucket"
         tipClassName={classes.expandBtn}
       >
         <UnfoldMore color="primary" />
@@ -165,9 +165,9 @@ const ScreamDialog = ({
   );
 };
 
-ScreamDialog.propTypes = {
-  screamId: PropTypes.string.isRequired,
+BucketDialog.propTypes = {
+  bucketId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(ScreamDialog);
+export default withStyles(styles)(BucketDialog);
