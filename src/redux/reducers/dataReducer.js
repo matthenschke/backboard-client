@@ -8,6 +8,7 @@ import {
   POST_BUCKET,
   ADD_COMMENT,
   GET_USER_PROFILE,
+  UPLOAD_IMAGE,
 } from "../types";
 
 const initialState = {
@@ -70,6 +71,16 @@ export default (state = initialState, action) => {
           ...state.bucket,
           comments: [action.payload, ...state.bucket.comments],
         },
+      };
+    }
+    case UPLOAD_IMAGE: {
+      state.buckets.forEach((bucket) => {
+        if (bucket.userHandle === action.payload.userHandle) {
+          bucket.userImage = action.payload.imageUrl;
+        }
+      });
+      return {
+        ...state,
       };
     }
     case GET_USER_PROFILE: {

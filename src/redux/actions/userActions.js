@@ -6,6 +6,7 @@ import {
   SET_USER,
   LOADING_USER,
   MARK_NOTIFICATIONS_READ,
+  UPLOAD_IMAGE,
 } from "../types";
 import axios from "axios";
 
@@ -63,7 +64,10 @@ export const getUserData = () => async (dispatch) => {
 
 export const uploadImage = (formData) => async (dispatch) => {
   try {
-    await axios.post("/user/image", formData);
+    const { data } = await axios.post("/user/image", formData);
+    console.log(data);
+
+    dispatch({ type: UPLOAD_IMAGE, payload: data });
     dispatch(getUserData());
   } catch (err) {
     console.error(err);
