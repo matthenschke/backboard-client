@@ -8,8 +8,6 @@ import {
   LocationOn,
   Link as LinkIcon,
   CalendarToday,
-  Edit,
-  KeyboardReturn,
 } from "@material-ui/icons";
 
 const styles = (theme) => ({
