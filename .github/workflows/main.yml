@@ -28,5 +28,5 @@ jobs:
       - run: npm ci
       - run: npm run build
           env:
-            CI: false
+            process.env.CI : false
       - run: npm run deploy
